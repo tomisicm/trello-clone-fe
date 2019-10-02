@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import Joi from "joi-browser"
 
 import authService from "./../../utils/services/auth-service"
-import { fetchCurrentUser } from "../../redux/actions/userAction"
+import { fetchCurrentUser } from "../../redux/actions/userActions"
 
 import LoginForm from "../../components/common/LoginForm"
 import BaseInput from "./../../components/common/Input"
@@ -17,7 +17,7 @@ class Login extends LoginForm {
       password: ""
     },
 
-    toDashboard: false,
+    toHome: false,
 
     errors: []
   }
@@ -35,8 +35,8 @@ class Login extends LoginForm {
   render() {
     const { data, errors } = this.state
 
-    if (this.state.toDashboard === true) {
-      return <Redirect to="/dashboard" />
+    if (this.state.toHome === true) {
+      return <Redirect to="/home" />
     }
 
     return (
@@ -83,7 +83,7 @@ class Login extends LoginForm {
       authService
         .login(this.state.data)
         .then(() => this.props.fetchCurrentUser())
-        .then(() => this.setState(() => ({ toDashboard: true })))
+        .then(() => this.setState(() => ({ toHome: true })))
     } catch (e) {
       const newError = e.response.data
 

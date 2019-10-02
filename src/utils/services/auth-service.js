@@ -5,7 +5,7 @@ import http from "./http-service"
 class AuthService {
   login(body) {
     return http
-      .post("/api/login", body)
+      .post("/api/auth/login", body)
       .then(({ data }) => {
         this.loggingIn(data)
       })

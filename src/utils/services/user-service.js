@@ -4,7 +4,7 @@ import { setCurrentUserToLS } from "./auth-service"
 
 class UserService {
   async getCurrentUser() {
-    const { data } = await http.get("/api/me")
+    const { data } = await http.get("/api/auth/me")
 
     setCurrentUserToLS(data)
 
