@@ -5,8 +5,8 @@ import { Switch, Route, Redirect } from "react-router-dom"
 import AppLogin from "./screens/auth/AppLogin"
 import AppLogout from "./screens/auth/AppLogout"
 
-import Home from "./screens/Home/Home"
-import AddBoard from "./screens/Board/AddBoard"
+import Home from "./screens/home/Home"
+import AddBoard from "./screens/board/AddBoard"
 
 export const Routes = () => {
   return (
