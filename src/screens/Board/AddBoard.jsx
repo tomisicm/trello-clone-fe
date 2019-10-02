@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import boardService from "../../utils/services/board-service"
+
 import BaseInput from "./../../components/common/Input"
 import BaseButton from "./../../components/common/BaseButton"
 import BaseTextarea from "./../../components/common/BaseTextarea"
@@ -8,17 +10,38 @@ import BaseCheckbox from "./../../components/common/BaseCheckbox"
 class AddBoard extends Component {
   state = {
     board: {
+      name: "",
+      description: "",
       isPrivate: false
     },
     errors: {}
   }
 
+  handleSaveBoard() {
+    boardService
+      .createBoard(this.state.board)
+      .then(({ data }) => {
+        console.log(data)
+        this.props.history.push("/home")
+      })
+      .catch(({ response }) => {
+        const { errors } = response.data
+        this.setState({
+          errors: { ...errors }
+        })
+      })
+  }
+
   updateBoardName = ({ target }) => {
-    console.log(target)
+    this.setState({
+      board: { ...this.state.board, [target.name]: target.value }
+    })
   }
 
   updateBoardDescription = ({ target }) => {
-    console.log(target)
+    this.setState({
+      board: { ...this.state.board, [target.name]: target.value }
+    })
   }
 
   updateIsPrivate = (e, t) => {
