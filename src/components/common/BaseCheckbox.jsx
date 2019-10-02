@@ -7,7 +7,7 @@ const BaseCheckbox = props => {
   const { onClick, label, name, classes, value } = props
 
   useEffect(() => {
-    return value ? setChecked("") : setChecked("checked")
+    return value ? setChecked("checked") : setChecked("")
   }, [value])
 
   return (
