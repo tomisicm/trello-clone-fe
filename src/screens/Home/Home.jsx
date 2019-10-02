@@ -1,5 +1,9 @@
 import React, { Component } from "react"
 
+import List from "./../../components/common/List"
+
+import BoardCard from "../board/BoardCard"
+
 import boardService from "../../utils/services/board-service"
 
 class Home extends Component {
@@ -16,7 +20,7 @@ class Home extends Component {
       .getBoards()
       .then(({ data }) => {
         this.setState({
-          boards: { ...data }
+          boards: [...data]
         })
       })
       .catch(({ response }) => {
@@ -28,12 +32,16 @@ class Home extends Component {
   }
 
   render() {
+    const { boards } = this.state
+
     return (
       <div className="container mt-5">
         <div className="row">
           <div className="container">
             <h3>My boards:</h3>
-            <div className="row my-2">list</div>
+            <div className="row my-2">
+              <List items={boards}>{BoardCard}</List>
+            </div>
           </div>
         </div>
         <div className="row">
