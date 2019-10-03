@@ -7,20 +7,33 @@ import Column from "../../components/column/Column"
 
 const mapStateToProps = state => {
   return {
-    tasksReducer: state.tasksReducer
+    columnReducer: state.columnReducer
   }
 }
 
 const mapDispatchToProps = { fetchBoardTasks }
 
 class Board extends Component {
-  state = {}
+  state = {
+    // columns: []
+  }
+
+  componentDidMount() {
+    this.props.fetchBoardTasks(this.props.match.params.board)
+  }
+
+  componentDidUpdate() {}
+
   render() {
+    const columns = this.props.columnReducer
+
     return (
       <div className="container">
         Board
         <div className="row">
-          <Column />
+          {columns &&
+            columns.length &&
+            columns.map(column => <Column key={column.id}></Column>)}
         </div>
       </div>
     )

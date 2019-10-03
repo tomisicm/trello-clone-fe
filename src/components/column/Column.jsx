@@ -6,7 +6,7 @@ const Column = props => {
   //   const { name } = this.props
 
   return (
-    <div className="col-md-6">
+    <div className="col-md-4">
       <div className="row my-2">Column Name</div>
 
       <div className="row">

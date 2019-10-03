@@ -2,7 +2,7 @@ import http from "./http-service"
 
 class TaskService {
   getTasks(id) {
-    return http.get(`/api/boards/${id}`)
+    return http.get(`/api/boards/${id}/tasks`)
   }
 
   createTask(column, task) {
