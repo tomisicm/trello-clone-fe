@@ -1,6 +1,17 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
+
+import { fetchBoardTasks } from "../../redux/actions/columnActions"
 
 import Column from "../../components/column/Column"
+
+const mapStateToProps = state => {
+  return {
+    tasksReducer: state.tasksReducer
+  }
+}
+
+const mapDispatchToProps = { fetchBoardTasks }
 
 class Board extends Component {
   state = {}
@@ -16,4 +27,7 @@ class Board extends Component {
   }
 }
 
-export default Board
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Board)
