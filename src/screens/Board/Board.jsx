@@ -28,9 +28,16 @@ class Board extends Component {
     const columns = this.props.columnReducer
 
     return (
-      <div className="container">
+      <div style={{ height: "100vh" }}>
         Board
-        <div className="row">
+        <div
+          style={{
+            border: "1px solid red",
+            display: "flex",
+            height: "90%",
+            overflowY: "hidden"
+          }}
+        >
           {columns &&
             columns.length &&
             columns.map(column => <Column key={column.id}></Column>)}

@@ -11,7 +11,7 @@ import Board from "./screens/board/Board"
 
 export const Routes = () => {
   return (
-    <main className="container">
+    <main>
       <Switch>
         <Route exact path="/">
           <Redirect to="/home"></Redirect>

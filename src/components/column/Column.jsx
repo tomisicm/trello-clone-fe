@@ -6,10 +6,22 @@ const Column = props => {
   //   const { name } = this.props
 
   return (
-    <div className="col-md-4">
-      <div className="row my-2">Column Name</div>
+    <div style={{ border: "2px solid blue", height: "100vh" }}>
+      <div>Column Name</div>
 
-      <div className="row">
+      <div
+        style={{ overflow: "scroll", height: "100vh", paddingBottom: "170px" }}
+      >
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
         <TaskCard />
       </div>
     </div>
