@@ -1,7 +1,7 @@
 import React from "react"
-import { Card } from "react-bootstrap"
 
 import TaskCard from "../task/TaskCard"
+import AddTaskCard from "../task/TaskAddCard"
 
 const Column = props => {
   const { column } = props
@@ -17,11 +17,8 @@ const Column = props => {
       >
         {column.tasks.length >= 1 &&
           column.tasks.map(task => <TaskCard key={task.id} task={task} />)}
-        <Card style={{ width: "18rem" }} bg="light">
-          <Card.Body className="mb-2 text-muted">
-            <Card.Text>Add new task</Card.Text>
-          </Card.Body>
-        </Card>
+
+        <AddTaskCard column={column} />
       </div>
     </div>
   )
