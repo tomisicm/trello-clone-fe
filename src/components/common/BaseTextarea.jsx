@@ -2,13 +2,13 @@ import React from "react"
 // import propTypes from "prop-types"
 
 const BaseInput = props => {
-  const { value, onChange } = props
+  const { value, onChange, label } = props
 
   const { error, children } = props
 
   return (
     <div className="form-group">
-      <label htmlFor={props.name}>{props.label}</label>
+      {label && <label htmlFor={props.name}>{props.label}</label>}
       <textarea
         className={props.textareaFieldClasses}
         id={props.name}
