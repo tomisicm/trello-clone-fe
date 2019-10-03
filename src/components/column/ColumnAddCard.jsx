@@ -8,12 +8,6 @@ import { createBoardColumn } from "../../redux/actions/columnActions"
 import Input from "./../../components/common/Input"
 import BaseButton from "./../../components/common/BaseButton"
 
-const mapStateToProps = state => {
-  return {
-    columnReducer: state.columnReducer
-  }
-}
-
 class TaskAddCard extends Component {
   state = {
     editState: false,
@@ -88,6 +82,6 @@ class TaskAddCard extends Component {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   { createBoardColumn }
 )(TaskAddCard)
