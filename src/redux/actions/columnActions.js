@@ -1,10 +1,10 @@
-import { FETCH_BOARD_TASKS } from "../constants"
-import taskService from "../../utils/services/task-service"
+import { CREATE_BOARD_COLUMN } from "../constants"
+import columnService from "../../utils/services/column-service"
 
-export function fetchBoardTasks(boardId) {
+export function createBoardColumn(boardId, column) {
   return async function(dispatch, getState) {
-    const { data } = await taskService.getTasks(boardId)
+    const { data } = await columnService.createColumn(boardId, column)
 
-    dispatch({ type: FETCH_BOARD_TASKS, payload: data })
+    dispatch({ type: CREATE_BOARD_COLUMN, payload: data })
   }
 }

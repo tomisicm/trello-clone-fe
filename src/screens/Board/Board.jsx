@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import { fetchBoardTasks } from "../../redux/actions/columnActions"
+import { fetchBoardTasks } from "../../redux/actions/taskActions"
 
 import Column from "../../components/column/Column"
 import ColumnAddCard from "../../components/column/ColumnAddCard"
