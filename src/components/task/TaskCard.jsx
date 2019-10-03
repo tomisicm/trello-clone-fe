@@ -12,24 +12,23 @@ const TaskCard = props => {
   }
 
   return (
-    <Card
-      bg="light"
-      style={{ width: "18rem" }}
-      onClick={toggleEditState}
-      onBlur={toggleEditState}
-    >
+    <Card className="my-2" bg="light" style={{ width: "18rem" }}>
       <Card.Header>
         <div className="row">
           <div className="col">{task.name}</div>
           {/* <div className="col">menu</div> */}
         </div>
       </Card.Header>
-      <Card.Body className="mb-2 text-muted">
+      <Card.Body
+        onClick={toggleEditState}
+        onBlur={toggleEditState}
+        className="mb-2 text-muted"
+      >
         <Card.Text>{task.description}</Card.Text>
       </Card.Body>
 
-      <Card.Footer>
-        {editState && (
+      {editState && (
+        <Card.Footer>
           <React.Fragment>
             <BaseButton
               // onClick={this.handleDelete}
@@ -42,8 +41,8 @@ const TaskCard = props => {
               classes="btn-sm btn-light mx-2"
             /> */}
           </React.Fragment>
-        )}
-      </Card.Footer>
+        </Card.Footer>
+      )}
     </Card>
   )
 }
