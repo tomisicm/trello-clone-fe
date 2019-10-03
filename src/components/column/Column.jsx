@@ -18,7 +18,7 @@ const Column = props => {
         {column.tasks.length >= 1 &&
           column.tasks.map(task => <TaskCard key={task.id} task={task} />)}
 
-        <AddTaskCard column={column} />
+        <AddTaskCard columnId={column.id} />
       </div>
     </div>
   )

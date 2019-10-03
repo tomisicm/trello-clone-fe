@@ -5,9 +5,8 @@ class TaskService {
     return http.get(`/api/boards/${id}/tasks`)
   }
 
-  createTask(column, task) {
-    const { id } = column
-    return http.post(`/api/column/${id}/tasks`, task)
+  createTask(columnId, task) {
+    return http.post(`/api/columns/${columnId}/tasks`, task)
   }
 
   editTask(task) {

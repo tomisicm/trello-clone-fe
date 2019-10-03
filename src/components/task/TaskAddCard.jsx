@@ -1,13 +1,29 @@
 import React, { Component } from "react"
-import { Card } from "react-bootstrap"
+import { connect } from "react-redux"
 
+import { createBoardTask } from "../../redux/actions/taskActions"
+
+import { Card } from "react-bootstrap"
 import Input from "./../../components/common/Input"
 import Textarea from "./../../components/common/BaseTextarea"
 import BaseButton from "./../../components/common/BaseButton"
 
 class TaskAddCard extends Component {
   state = {
-    editState: false
+    editState: false,
+    task: {
+      name: "",
+      description: ""
+    }
+  }
+
+  updateTask = ({ target }) => {
+    this.setState({
+      task: {
+        ...this.state.task,
+        [target.name]: target.value
+      }
+    })
   }
 
   toggleEditState = e => {
@@ -17,11 +33,12 @@ class TaskAddCard extends Component {
   }
 
   handleSave = e => {
+    this.props.createBoardTask(this.props.columnId, this.state.task)
     this.toggleEditState()
   }
 
   render() {
-    const { editState } = this.state
+    const { editState, task } = this.state
 
     return (
       <Card style={{ width: "18rem" }} bg="light">
@@ -38,9 +55,20 @@ class TaskAddCard extends Component {
               className="my-1 text-muted"
               style={{ padding: "0.25rem" }}
             >
-              <Input placeholder={"Task name"} />
-              <Textarea placeholder={"Task description"} />
+              <Input
+                value={task.name}
+                name={"name"}
+                placeholder={"Task name"}
+                onChange={this.updateTask}
+              />
+              <Textarea
+                value={task.description}
+                name={"description"}
+                placeholder={"Task description"}
+                onChange={this.updateTask}
+              />
             </Card.Body>
+
             <Card.Footer>
               <BaseButton
                 onClick={this.handleSave}
@@ -60,4 +88,7 @@ class TaskAddCard extends Component {
   }
 }
 
-export default TaskAddCard
+export default connect(
+  null,
+  { createBoardTask }
+)(TaskAddCard)
