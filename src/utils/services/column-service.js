@@ -2,8 +2,7 @@ import http from "./http-service"
 
 class ColumnService {
   createColumn(boardId, column) {
-    // const { id } = board
-    return http.post(`/api/board/${boardId}/columns`, column)
+    return http.post(`/api/boards/${boardId}/columns`, column)
   }
 
   editColumn(column) {

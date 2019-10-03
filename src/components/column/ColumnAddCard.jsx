@@ -1,8 +1,18 @@
 import React, { Component } from "react"
 import { Card } from "react-bootstrap"
 
+import { connect } from "react-redux"
+
+import { createBoardColumn } from "../../redux/actions/columnActions"
+
 import Input from "./../../components/common/Input"
 import BaseButton from "./../../components/common/BaseButton"
+
+const mapStateToProps = state => {
+  return {
+    columnReducer: state.columnReducer
+  }
+}
 
 class TaskAddCard extends Component {
   state = {
@@ -18,6 +28,7 @@ class TaskAddCard extends Component {
   }
 
   handleSave = e => {
+    this.props.createBoardColumn(this.props.boardId, this.state.column)
     this.toggleEditState()
   }
 
@@ -52,7 +63,7 @@ class TaskAddCard extends Component {
               <Input
                 name="name"
                 value={column.name}
-                placeholder={"Task name"}
+                placeholder={"Column name"}
                 onChange={this.updateColumnName}
                 error={errors.name}
               />
@@ -76,4 +87,7 @@ class TaskAddCard extends Component {
   }
 }
 
-export default TaskAddCard
+export default connect(
+  mapStateToProps,
+  { createBoardColumn }
+)(TaskAddCard)
