@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { fetchBoardTasks } from "../../redux/actions/columnActions"
 
 import Column from "../../components/column/Column"
+import ColumnAddCard from "../../components/column/ColumnAddCard"
 
 const mapStateToProps = state => {
   return {
@@ -40,6 +41,12 @@ class Board extends Component {
           {columns &&
             columns.length &&
             columns.map(column => <Column key={column.id} column={column} />)}
+          <div className="w-100" style={{ height: "100vh" }}>
+            <ColumnAddCard
+              className="card w-100"
+              style={{ width: "18rem" }}
+            ></ColumnAddCard>
+          </div>
         </div>
       </div>
     )

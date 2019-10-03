@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { Card } from "react-bootstrap"
 
 import Input from "./../../components/common/Input"
-import Textarea from "./../../components/common/BaseTextarea"
 import BaseButton from "./../../components/common/BaseButton"
 
 class TaskAddCard extends Component {
@@ -28,7 +27,7 @@ class TaskAddCard extends Component {
         {!editState && (
           <BaseButton
             onClick={this.toggleEditState}
-            label={"+ Add New Task"}
+            label={"+ Add New Column"}
             classes="btn-sm btn-primary"
           />
         )}
@@ -39,18 +38,17 @@ class TaskAddCard extends Component {
               style={{ padding: "0.25rem" }}
             >
               <Input placeholder={"Task name"} />
-              <Textarea placeholder={"Task description"} />
             </Card.Body>
             <Card.Footer>
               <BaseButton
                 onClick={this.handleSave}
                 label={"Save"}
-                classes="btn-sm btn-success mx-2"
+                classes="btn-sm btn-success"
               />
               <BaseButton
                 onClick={this.toggleEditState}
                 label={"Cancel"}
-                classes="btn-sm btn-light mx-2"
+                classes="btn-sm btn-light"
               />
             </Card.Footer>
           </React.Fragment>
