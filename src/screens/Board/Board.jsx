@@ -32,7 +32,6 @@ class Board extends Component {
         Board
         <div
           style={{
-            border: "1px solid red",
             display: "flex",
             height: "90%",
             overflowY: "hidden"
@@ -40,7 +39,7 @@ class Board extends Component {
         >
           {columns &&
             columns.length &&
-            columns.map(column => <Column key={column.id}></Column>)}
+            columns.map(column => <Column key={column.id} column={column} />)}
         </div>
       </div>
     )
