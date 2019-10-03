@@ -1,6 +1,7 @@
 import React from "react"
 // import propTypes from "prop-types"
 
+// TODO: research react textarea resizable
 const BaseInput = props => {
   const { value, onChange, label } = props
 
