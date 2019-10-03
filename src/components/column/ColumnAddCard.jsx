@@ -6,7 +6,9 @@ import BaseButton from "./../../components/common/BaseButton"
 
 class TaskAddCard extends Component {
   state = {
-    editState: false
+    editState: false,
+    column: { name: "" },
+    errors: {}
   }
 
   toggleEditState = e => {
@@ -19,8 +21,18 @@ class TaskAddCard extends Component {
     this.toggleEditState()
   }
 
+  updateColumnName = ({ target }) => {
+    this.setState({
+      column: {
+        [target.name]: target.value
+      }
+    })
+  }
+
   render() {
-    const { editState } = this.state
+    const { editState, column } = this.state
+
+    const { errors } = this.state
 
     return (
       <Card style={{ width: "18rem" }} bg="light">
@@ -37,18 +49,24 @@ class TaskAddCard extends Component {
               className="my-1 text-muted"
               style={{ padding: "0.25rem" }}
             >
-              <Input placeholder={"Task name"} />
+              <Input
+                name="name"
+                value={column.name}
+                placeholder={"Task name"}
+                onChange={this.updateColumnName}
+                error={errors.name}
+              />
             </Card.Body>
             <Card.Footer>
               <BaseButton
                 onClick={this.handleSave}
                 label={"Save"}
-                classes="btn-sm btn-success"
+                classes="btn-sm btn-success mx-2"
               />
               <BaseButton
                 onClick={this.toggleEditState}
                 label={"Cancel"}
-                classes="btn-sm btn-light"
+                classes="btn-sm btn-light mx-2"
               />
             </Card.Footer>
           </React.Fragment>
