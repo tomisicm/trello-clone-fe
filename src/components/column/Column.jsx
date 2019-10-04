@@ -16,7 +16,9 @@ const Column = props => {
         style={{ overflow: "scroll", height: "100vh", paddingBottom: "170px" }}
       >
         {column.tasks.length >= 1 &&
-          column.tasks.map(task => <TaskCard key={task.id} task={task} />)}
+          column.tasks.map((task, index) => (
+            <TaskCard key={task.id} index={index} task={task} />
+          ))}
 
         <AddTaskCard columnId={column.id} />
       </div>

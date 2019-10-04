@@ -1,14 +1,21 @@
 import React, { useState } from "react"
-import { Card } from "react-bootstrap"
+import { connect } from "react-redux"
 
+import { deleteBoardTask } from "../../redux/actions/taskActions"
+
+import { Card } from "react-bootstrap"
 import BaseButton from "./../../components/common/BaseButton"
 
 const TaskCard = props => {
-  const { task } = props
+  const { task, index } = props
   const [editState, setEditState] = useState(false)
 
   function toggleEditState() {
     setEditState(!editState)
+  }
+
+  function handleDelete() {
+    props.deleteBoardTask(task, index)
   }
 
   return (
@@ -31,7 +38,7 @@ const TaskCard = props => {
         <Card.Footer>
           <React.Fragment>
             <BaseButton
-              // onClick={this.handleDelete}
+              onClick={handleDelete}
               label={"Delete"}
               classes="btn-sm btn-success mx-2"
             />
@@ -47,4 +54,7 @@ const TaskCard = props => {
   )
 }
 
-export default TaskCard
+export default connect(
+  null,
+  { deleteBoardTask }
+)(TaskCard)
