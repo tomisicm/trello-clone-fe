@@ -1,8 +1,11 @@
 import {
-  FETCH_BOARD_TASKS,
   CREATE_BOARD_COLUMN,
-  CREATE_BOARD_TASK
+  FETCH_BOARD_TASKS,
+  CREATE_BOARD_TASK,
+  DELETE_BOARD_TASK
 } from "../constants"
+
+import _ from "lodash"
 
 const initialState = {
   columns: []
@@ -28,6 +31,22 @@ const columnReducer = (state = initialState, action) => {
         }
         return column
       })
+    }
+    case DELETE_BOARD_TASK: {
+      const taskColumnId = action.payload.column_id
+      const removedTask = action.payload.id
+
+      const column = [...state.filter(col => col.id === taskColumnId)]
+
+      const columnTasks = [...column[0].tasks]
+
+      const newTasks = columnTasks.filter(task => {
+        return task.id !== removedTask.id
+      })
+
+      console.log(newTasks)
+
+      return state
     }
     default:
       return state
