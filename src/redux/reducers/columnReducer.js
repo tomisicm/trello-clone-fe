@@ -33,20 +33,17 @@ const columnReducer = (state = initialState, action) => {
       })
     }
     case DELETE_BOARD_TASK: {
-      const taskColumnId = action.payload.column_id
       const removedTask = action.payload.id
 
-      const column = [...state.filter(col => col.id === taskColumnId)]
+      const newState = [...state]
 
-      const columnTasks = [...column[0].tasks]
-
-      const newTasks = columnTasks.filter(task => {
-        return task.id !== removedTask.id
+      newState.forEach(function(o) {
+        o.tasks = o.tasks.filter(task => {
+          return task.id !== removedTask.id
+        })
       })
 
-      console.log(newTasks)
-
-      return state
+      return newState
     }
     default:
       return state
