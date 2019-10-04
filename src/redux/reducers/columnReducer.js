@@ -12,36 +12,42 @@ const initialState = {
 const columnReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_BOARD_TASKS: {
-      return [...state.columns, ...action.payload]
+      return { ...state, columns: [...action.payload] }
     }
     case CREATE_BOARD_COLUMN: {
-      return [...state, action.payload]
+      return { ...state, columns: [...state.columns, action.payload] }
     }
+
     case CREATE_BOARD_TASK: {
       const taskColumnId = action.payload.column_id
 
-      return state.map((column, index) => {
-        if (column.id === taskColumnId) {
-          return {
-            ...column,
-            tasks: [...column.tasks, action.payload]
-          }
-        }
-        return column
-      })
+      return {
+        ...state,
+        columns: [
+          ...state.columns.map((column, index) => {
+            if (column.id === taskColumnId) {
+              return {
+                ...column,
+                tasks: [...column.tasks, action.payload]
+              }
+            }
+            return column
+          })
+        ]
+      }
     }
+
     case DELETE_BOARD_TASK: {
       const removedTask = action.payload.id
 
-      const newState = [...state]
-
-      newState.forEach(function(o) {
-        o.tasks = o.tasks.filter(task => {
-          return task.id !== removedTask.id
+      return {
+        ...state,
+        ...state.columns.forEach(function(o) {
+          o.tasks = o.tasks.filter(task => {
+            return task.id !== removedTask.id
+          })
         })
-      })
-
-      return newState
+      }
     }
     default:
       return state

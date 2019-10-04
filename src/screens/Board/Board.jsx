@@ -26,7 +26,7 @@ class Board extends Component {
   componentDidUpdate() {}
 
   render() {
-    const columns = this.props.columnReducer
+    const { columns } = this.props.columnReducer
 
     return (
       <div style={{ height: "100vh" }}>
@@ -38,8 +38,7 @@ class Board extends Component {
             overflowY: "hidden"
           }}
         >
-          {columns &&
-            columns.length &&
+          {columns.length > 0 &&
             columns.map(column => <Column key={column.id} column={column} />)}
           <div className="w-100" style={{ height: "100vh" }}>
             <ColumnAddCard
