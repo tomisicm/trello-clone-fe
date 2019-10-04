@@ -5,8 +5,6 @@ import {
   DELETE_BOARD_TASK
 } from "../constants"
 
-import _ from "lodash"
-
 const initialState = {
   columns: []
 }
