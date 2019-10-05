@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import List from "./../../components/common/List"
+import BoardList from "./../../components/board/BoardList"
 
 import boardService from "../../utils/services/board-service"
 
@@ -38,7 +38,7 @@ class Home extends Component {
           <div className="container">
             <h3>My boards:</h3>
             <div className="row my-2">
-              <List items={boards}></List>
+              <BoardList items={boards}></BoardList>
             </div>
           </div>
         </div>

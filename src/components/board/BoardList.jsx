@@ -1,5 +1,6 @@
 import React from "react"
-import { Link } from "react-router-dom"
+
+import BoardCard from "../board/BoardCard"
 
 const List = props => {
   const { items } = props
@@ -9,7 +10,7 @@ const List = props => {
       {items.length > 1 &&
         items.map(board => (
           <div className={props.itemClassess} key={board.id}>
-            <Link to={`/boards/${board.id}`}>{board.name}</Link>
+            <BoardCard board={board} />
           </div>
         ))}
     </div>

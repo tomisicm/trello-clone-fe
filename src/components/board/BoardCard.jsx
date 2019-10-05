@@ -1,21 +1,28 @@
-import React, { Component } from "react"
+import React from "react"
+import { Link } from "react-router-dom"
+import { Card } from "react-bootstrap"
 
-class BoardCard extends Component {
-  state = {}
-  render() {
-    return () => (
-      <div className="card border-success mb-3" style="max-width: 18rem;">
-        <div className="card-header">Header</div>
-        <div className="card-body text-success">
-          <h5 className="card-title">Success card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+const BoardCard = props => {
+  const { board } = props
+  return (
+    <Card style={{ width: "18rem" }}>
+      <Card.Body>
+        <Card.Title>{board.name}</Card.Title>
+
+        <Card.Text className="mb-1 text-muted">{board.description}</Card.Text>
+      </Card.Body>
+      <Card.Footer>
+        <div className="row mt-1">
+          <div className="col">
+            <Link to={`boards/${board.id}/tasks`}>Tasks</Link>
+          </div>
+          <div className="col">
+            <Link to={`boards/${board.id}/settings`}>Settings</Link>
+          </div>
         </div>
-      </div>
-    )
-  }
+      </Card.Footer>
+    </Card>
+  )
 }
 
 export default BoardCard
