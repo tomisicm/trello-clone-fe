@@ -6,7 +6,7 @@ import boardService from "../../utils/services/board-service"
 
 class Home extends Component {
   state = {
-    boards: []
+    boards: {}
   }
 
   componentDidMount() {
@@ -18,8 +18,9 @@ class Home extends Component {
       .getBoards()
       .then(({ data }) => {
         this.setState({
-          boards: [...data]
+          boards: data
         })
+        console.log(this.state)
       })
       .catch(({ response }) => {
         const { errors } = response.data
@@ -37,15 +38,21 @@ class Home extends Component {
         <div className="row">
           <div className="container">
             <h3>My boards:</h3>
-            <div className="row my-2">
-              <BoardList items={boards}></BoardList>
-            </div>
+            {boards.owned && (
+              <div className="row my-2">
+                <BoardList items={boards.owned}></BoardList>
+              </div>
+            )}
           </div>
         </div>
         <div className="row">
           <div className="container">
             <h3>Other boards:</h3>
-            <div className="row">other list</div>
+            {boards.member && (
+              <div className="row my-2">
+                <BoardList items={boards.member}></BoardList>
+              </div>
+            )}
           </div>
         </div>
       </div>
