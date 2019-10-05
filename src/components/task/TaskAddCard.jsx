@@ -41,7 +41,7 @@ class TaskAddCard extends Component {
     const { editState, task } = this.state
 
     return (
-      <Card style={{ width: "18rem" }} bg="light">
+      <Card style={{ width: "18rem" }} bg="light" className="mt-3">
         {!editState && (
           <BaseButton
             onClick={this.toggleEditState}

@@ -1,7 +1,12 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import { fetchBoardTasks } from "../../redux/actions/taskActions"
+import { DragDropContext } from "react-beautiful-dnd"
+
+import {
+  fetchBoardTasks,
+  updateBoardTask
+} from "../../redux/actions/taskActions"
 import { fetchBoardMembers } from "../../redux/actions/boardActions"
 
 import Column from "../../components/column/Column"
@@ -13,7 +18,11 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = { fetchBoardTasks, fetchBoardMembers }
+const mapDispatchToProps = {
+  fetchBoardTasks,
+  updateBoardTask,
+  fetchBoardMembers
+}
 
 class Board extends Component {
   state = {
@@ -25,7 +34,27 @@ class Board extends Component {
     this.props.fetchBoardMembers(this.props.match.params.board)
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    console.log("rerender")
+  }
+
+  onDragEnd = e => {
+    try {
+      /* taskId == draggableId, destination.droppableId = column_id **/
+      const { destination, source, draggableId } = e
+
+      if (!destination) return
+      if (!source) return
+      if (!draggableId) return
+
+      this.props.updateBoardTask({
+        id: draggableId,
+        column_id: destination.droppableId
+      })
+    } catch {
+      console.error(e)
+    }
+  }
 
   render() {
     const { columns } = this.props.columnReducer
@@ -33,23 +62,25 @@ class Board extends Component {
     return (
       <div style={{ height: "100vh" }}>
         <h3 className="my-2 mx-2">Board</h3>
-        <div
-          style={{
-            display: "flex",
-            height: "90%",
-            overflowY: "hidden"
-          }}
-        >
-          {columns.length > 0 &&
-            columns.map(column => <Column key={column.id} column={column} />)}
-          <div className="w-100" style={{ height: "100vh" }}>
-            <ColumnAddCard
-              boardId={this.props.match.params.board}
-              className="card w-100"
-              style={{ width: "18rem" }}
-            ></ColumnAddCard>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div
+            style={{
+              display: "flex",
+              height: "90%",
+              overflowY: "hidden"
+            }}
+          >
+            {columns.length > 0 &&
+              columns.map(column => <Column key={column.id} column={column} />)}
+            <div className="w-100" style={{ height: "100vh" }}>
+              <ColumnAddCard
+                boardId={this.props.match.params.board}
+                className="card w-100"
+                style={{ width: "18rem" }}
+              ></ColumnAddCard>
+            </div>
           </div>
-        </div>
+        </DragDropContext>
       </div>
     )
   }
