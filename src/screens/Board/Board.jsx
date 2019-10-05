@@ -32,7 +32,7 @@ class Board extends Component {
 
     return (
       <div style={{ height: "100vh" }}>
-        Board
+        <h3 className="my-2 mx-2">Board</h3>
         <div
           style={{
             display: "flex",
