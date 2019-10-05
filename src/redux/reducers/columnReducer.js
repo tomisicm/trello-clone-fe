@@ -4,6 +4,7 @@ import {
   CREATE_BOARD_TASK,
   UPDATE_BOARD_TASK,
   DELETE_BOARD_TASK
+  // TASK_CHANGED_COLUMN
 } from "../constants"
 
 const initialState = {
@@ -64,11 +65,31 @@ const columnReducer = (state = initialState, action) => {
         ...state,
         ...state.columns.forEach(function(o) {
           o.tasks = o.tasks.filter(task => {
-            return task.id !== removedTask.id
+            return task.id !== removedTask
           })
         })
       }
     }
+
+    // case TASK_CHANGED_COLUMN: {
+    //   return {
+    //     ...state,
+    //     columns: [
+    //       ...state.columns.map(column => {
+    //         if (column.id === action.payload.column_id) {
+    //           column.tasks.map(task => {
+    //             if (task.id === action.payload.id) {
+    //               task = { ...action.payload }
+    //             }
+    //             return task
+    //           })
+    //         }
+    //         return column
+    //       })
+    //     ]
+    //   }
+    // }
+
     default:
       return state
   }
