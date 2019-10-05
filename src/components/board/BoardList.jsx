@@ -7,7 +7,7 @@ const List = props => {
 
   return (
     <div className={props.listClasses}>
-      {items.length > 1 &&
+      {items.length > 0 &&
         items.map(board => (
           <div className={props.itemClassess} key={board.id}>
             <BoardCard board={board} />
