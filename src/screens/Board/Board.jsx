@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 
 import { fetchBoardTasks } from "../../redux/actions/taskActions"
+import { fetchBoardMembers } from "../../redux/actions/boardActions"
 
 import Column from "../../components/column/Column"
 import ColumnAddCard from "../../components/column/ColumnAddCard"
@@ -12,7 +13,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = { fetchBoardTasks }
+const mapDispatchToProps = { fetchBoardTasks, fetchBoardMembers }
 
 class Board extends Component {
   state = {
@@ -21,6 +22,7 @@ class Board extends Component {
 
   componentDidMount() {
     this.props.fetchBoardTasks(this.props.match.params.board)
+    this.props.fetchBoardMembers(this.props.match.params.board)
   }
 
   componentDidUpdate() {}

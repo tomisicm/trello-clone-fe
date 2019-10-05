@@ -1,14 +1,27 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 
-import { deleteBoardTask } from "../../redux/actions/taskActions"
+import {
+  deleteBoardTask,
+  updateBoardTask
+} from "../../redux/actions/taskActions"
 
+import Select from "react-select"
 import { Card } from "react-bootstrap"
 import BaseButton from "./../../components/common/BaseButton"
+
+const mapStateToProps = state => {
+  return {
+    boardMembersReducer: state.boardReducer
+  }
+}
 
 const TaskCard = props => {
   const { task, index } = props
   const [editState, setEditState] = useState(false)
+  // const [selectedEmployee, setSelectedEmployeeState] = useState({})
+
+  const { boardMembers } = props.boardMembersReducer
 
   function toggleEditState() {
     setEditState(!editState)
@@ -16,6 +29,13 @@ const TaskCard = props => {
 
   function handleDelete() {
     props.deleteBoardTask(task, index)
+  }
+
+  function handleSelectAssignee(e) {
+    props.updateBoardTask({
+      ...task,
+      assignee: e.id
+    })
   }
 
   return (
@@ -30,7 +50,18 @@ const TaskCard = props => {
         onClick={toggleEditState}
         onBlur={toggleEditState}
         className="mb-2 text-muted"
+        style={{ padding: "0.25rem" }}
       >
+        <div className="col my-2">
+          <Select
+            options={boardMembers}
+            defaultValue={task.assignee}
+            placeholder={"Unassigned Task"}
+            getOptionLabel={option => option.name}
+            getOptionValue={option => option.id}
+            onChange={handleSelectAssignee}
+          ></Select>
+        </div>
         <Card.Text>{task.description}</Card.Text>
       </Card.Body>
 
@@ -55,6 +86,6 @@ const TaskCard = props => {
 }
 
 export default connect(
-  null,
-  { deleteBoardTask }
+  mapStateToProps,
+  { deleteBoardTask, updateBoardTask }
 )(TaskCard)

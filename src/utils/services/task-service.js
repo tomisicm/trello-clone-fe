@@ -9,7 +9,7 @@ class TaskService {
     return http.post(`/api/columns/${columnId}/tasks`, task)
   }
 
-  editTask(task) {
+  updateTask(task) {
     const { id } = task
     return http.put(`/api/tasks/${id}`, task)
   }

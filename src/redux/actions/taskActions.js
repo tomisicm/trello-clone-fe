@@ -1,6 +1,7 @@
 import {
   FETCH_BOARD_TASKS,
   CREATE_BOARD_TASK,
+  UPDATE_BOARD_TASK,
   DELETE_BOARD_TASK
 } from "../constants"
 
@@ -11,6 +12,14 @@ export function fetchBoardTasks(boardId) {
     const { data } = await taskService.getTasks(boardId)
 
     dispatch({ type: FETCH_BOARD_TASKS, payload: data })
+  }
+}
+
+export function updateBoardTask(task) {
+  return async function(dispatch, getState) {
+    const { data } = await taskService.updateTask(task)
+
+    dispatch({ type: UPDATE_BOARD_TASK, payload: data })
   }
 }
 

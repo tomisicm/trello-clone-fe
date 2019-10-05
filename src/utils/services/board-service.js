@@ -5,6 +5,10 @@ class BoardService {
     return http.get(`/api/boards`)
   }
 
+  getBoardMembers(boardId) {
+    return http.get(`/api/boards/${boardId}/members`)
+  }
+
   createBoard(board) {
     return http.post(`/api/boards`, board)
   }
