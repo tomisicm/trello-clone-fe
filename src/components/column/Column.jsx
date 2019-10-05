@@ -14,17 +14,19 @@ const Column = props => {
         {column.name}
       </div>
 
-      <div
-        style={{
-          overflow: "scroll",
-          height: "100vh",
-          paddingBottom: "170px"
-        }}
-        className="mt-2"
-      >
-        <Droppable droppableId={String(column.id)}>
-          {provided => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
+      <Droppable droppableId={String(column.id)}>
+        {provided => (
+          <div
+            style={{
+              overflow: "scroll",
+              height: "100vh",
+              paddingBottom: "170px"
+            }}
+            className="mt-2"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            <div>
               {column.tasks.length >= 1 &&
                 column.tasks.map((task, index) => (
                   // taskId ??
@@ -35,13 +37,13 @@ const Column = props => {
                     taskId={task.id}
                   />
                 ))}
-              {provided.placeholder}
             </div>
-          )}
-        </Droppable>
+            {provided.placeholder}
 
-        <AddTaskCard columnId={column.id} />
-      </div>
+            <AddTaskCard columnId={column.id} />
+          </div>
+        )}
+      </Droppable>
     </div>
   )
 }
