@@ -7,6 +7,8 @@ import {
   // TASK_CHANGED_COLUMN
 } from "../constants"
 
+import _ from "lodash"
+
 const initialState = {
   columns: []
 }
@@ -21,16 +23,32 @@ const columnReducer = (state = initialState, action) => {
     }
 
     case CREATE_BOARD_TASK: {
-      const taskColumnId = action.payload.column_id
+      const taskColumnId = action.payload.task.column_id
 
       return {
         ...state,
         columns: [
           ...state.columns.map((column, index) => {
             if (column.id === taskColumnId) {
-              return {
-                ...column,
-                tasks: [...column.tasks, action.payload]
+              if (action.payload.location) {
+                const copy = _.cloneDeep(column.tasks)
+
+                return {
+                  ...column,
+                  tasks: [
+                    ...copy.splice(
+                      action.payload.location.index,
+                      0,
+                      action.payload.task
+                    ),
+                    ...copy
+                  ]
+                }
+              } else {
+                return {
+                  ...column,
+                  tasks: [...column.tasks, action.payload.task]
+                }
               }
             }
             return column

@@ -40,7 +40,15 @@ export function updateColumnBoardTask({ destination, source, taskId }) {
     })
 
     // new incoming object
-    dispatch({ type: CREATE_BOARD_TASK, payload: data })
+    dispatch({
+      type: CREATE_BOARD_TASK,
+      payload: {
+        task: data,
+        location: {
+          index: destination.index
+        }
+      }
+    })
   }
 }
 
@@ -48,7 +56,7 @@ export function createBoardTask(columnId, task) {
   return async function(dispatch, getState) {
     const { data } = await taskService.createTask(columnId, task)
 
-    dispatch({ type: CREATE_BOARD_TASK, payload: data })
+    dispatch({ type: CREATE_BOARD_TASK, payload: { task: data } })
   }
 }
 
