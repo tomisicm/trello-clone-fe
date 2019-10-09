@@ -80,7 +80,7 @@ class Board extends Component {
                 boardId={this.props.match.params.board}
                 className="card w-100"
                 style={{ width: "18rem" }}
-              ></ColumnAddCard>
+              />
             </div>
           </div>
         </DragDropContext>
