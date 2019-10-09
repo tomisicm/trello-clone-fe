@@ -34,7 +34,7 @@ class NavigationBar extends Component {
               <div className="row">
                 {!_.isEmpty(user) && (
                   <li className="nav-item">
-                    <Link className="nav-link ml-2" to={`/board/add`}>
+                    <Link className="nav-link ml-2" to={`/boards/add`}>
                       New Board
                     </Link>
                   </li>
