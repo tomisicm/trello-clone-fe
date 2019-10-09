@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import { DragDropContext } from "react-beautiful-dnd"
+import { DragDropContext, Droppable } from "react-beautiful-dnd"
 
 import {
   fetchBoardTasks,
@@ -72,10 +72,22 @@ class Board extends Component {
             }}
           >
             {columns.map((column, index) => (
-              <div>
-                <Column key={column.id} index={index} column={column} />
-              </div>
+              <Droppable
+                droppableId={String(column.id)}
+                direction={"horizontal"}
+                type={"column"}
+              >
+                {provided => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {/*  */}
+                    <Column key={column.id} index={index} column={column} />
+                    {/*  */}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
             ))}
+
             <div className="w-100" style={{ height: "100vh" }}>
               <ColumnAddCard
                 boardId={this.props.match.params.board}
