@@ -9,7 +9,11 @@ const Column = props => {
   const { column } = props
 
   return (
-    <div className="w-100" style={{ height: "100vh" }}>
+    <div
+      className="w-100"
+      id={`board-column-${props.index}`}
+      style={{ height: "100vh" }}
+    >
       <div className="card w-100" style={{ width: "18rem" }}>
         {column.name}
       </div>

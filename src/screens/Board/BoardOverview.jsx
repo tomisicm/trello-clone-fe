@@ -72,7 +72,9 @@ class Board extends Component {
             }}
           >
             {columns.length > 0 &&
-              columns.map(column => <Column key={column.id} column={column} />)}
+              columns.map((column, index) => (
+                <Column key={column.id} index={index} column={column} />
+              ))}
             <div className="w-100" style={{ height: "100vh" }}>
               <ColumnAddCard
                 boardId={this.props.match.params.board}
