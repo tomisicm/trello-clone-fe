@@ -7,7 +7,7 @@ import AppLogout from "./screens/auth/AppLogout"
 
 import Home from "./screens/home/Home"
 import AddBoard from "./screens/board/AddBoard"
-import Board from "./screens/board/Board"
+import BoardOverview from "./screens/board/BoardOverview"
 import BoardSettings from "./screens/board/BoardSettings"
 
 export const Routes = () => {
@@ -23,7 +23,7 @@ export const Routes = () => {
 
         <Route exact path="/home" component={Home} />
         <Route exact path="/boards/add" component={AddBoard} />
-        <Route exact path="/boards/:board/tasks" component={Board} />
+        <Route exact path="/boards/:board/tasks" component={BoardOverview} />
         <Route exact path="/boards/:board/settings" component={BoardSettings} />
       </Switch>
     </main>
