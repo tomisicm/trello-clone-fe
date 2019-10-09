@@ -71,10 +71,11 @@ class Board extends Component {
               overflowY: "hidden"
             }}
           >
-            {columns.length > 0 &&
-              columns.map((column, index) => (
+            {columns.map((column, index) => (
+              <div>
                 <Column key={column.id} index={index} column={column} />
-              ))}
+              </div>
+            ))}
             <div className="w-100" style={{ height: "100vh" }}>
               <ColumnAddCard
                 boardId={this.props.match.params.board}
