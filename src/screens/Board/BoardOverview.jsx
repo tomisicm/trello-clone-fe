@@ -80,7 +80,7 @@ class Board extends Component {
             {columns.length > 0 &&
               columns.map((column, index) => (
                 <Droppable
-                  droppableId={String(column.id)}
+                  droppableId={`column-${column.id}`}
                   direction={"horizontal"}
                   type={"COLUMN"}
                   key={column.id}
@@ -90,9 +90,9 @@ class Board extends Component {
                       {/*  */}
 
                       <Column index={index} column={column} />
+                      {provided.placeholder}
 
                       {/*  */}
-                      {provided.placeholder}
                     </div>
                   )}
                 </Droppable>
