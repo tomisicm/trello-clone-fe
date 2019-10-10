@@ -47,7 +47,7 @@ class Board extends Component {
       if (!source) return
       if (!draggableId) return
 
-      // return console.log(e)
+      return console.log(e)
 
       if (type === "COLUMN") {
         console.log(e)
@@ -77,23 +77,26 @@ class Board extends Component {
               overflowY: "hidden"
             }}
           >
-            {columns.map((column, index) => (
-              <Droppable
-                droppableId={String(column.id)}
-                direction={"horizontal"}
-                type={"COLUMN"}
-                key={column.id}
-              >
-                {provided => (
-                  <div {...provided.droppableProps} ref={provided.innerRef}>
-                    {/*  */}
-                    <Column index={index} column={column} />
-                    {/*  */}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            ))}
+            {columns.length > 0 &&
+              columns.map((column, index) => (
+                <Droppable
+                  droppableId={String(column.id)}
+                  direction={"horizontal"}
+                  type={"COLUMN"}
+                  key={column.id}
+                >
+                  {provided => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                      {/*  */}
+
+                      <Column index={index} column={column} />
+
+                      {/*  */}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              ))}
 
             <div className="w-100" style={{ height: "100vh" }}>
               <ColumnAddCard
