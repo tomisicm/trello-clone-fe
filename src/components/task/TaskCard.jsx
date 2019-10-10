@@ -20,8 +20,8 @@ const mapStateToProps = state => {
 
 const TaskCard = props => {
   const { task, index } = props
+
   const [editState, setEditState] = useState(false)
-  // const [selectedEmployee, setSelectedEmployeeState] = useState({})
 
   const { boardMembers } = props.boardMembersReducer
 
