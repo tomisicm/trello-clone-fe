@@ -41,17 +41,23 @@ class Board extends Component {
   onDragEnd = e => {
     try {
       /* taskId == draggableId, destination.droppableId = column_id **/
-      const { destination, source, draggableId } = e
+      const { destination, source, draggableId, type } = e
 
       if (!destination) return
       if (!source) return
       if (!draggableId) return
 
-      this.props.updateColumnBoardTask({
-        source,
-        destination,
-        taskId: draggableId
-      })
+      // return console.log(e)
+
+      if (type === "COLUMN") {
+        console.log(e)
+      } else {
+        this.props.updateColumnBoardTask({
+          source,
+          destination,
+          taskId: draggableId
+        })
+      }
     } catch {
       console.error(e)
     }
@@ -75,12 +81,13 @@ class Board extends Component {
               <Droppable
                 droppableId={String(column.id)}
                 direction={"horizontal"}
-                type={"column"}
+                type={"COLUMN"}
+                key={column.id}
               >
                 {provided => (
                   <div {...provided.droppableProps} ref={provided.innerRef}>
                     {/*  */}
-                    <Column key={column.id} index={index} column={column} />
+                    <Column index={index} column={column} />
                     {/*  */}
                     {provided.placeholder}
                   </div>
