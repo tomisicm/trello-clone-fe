@@ -5,7 +5,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd"
 
 import {
   fetchBoardTasks,
-  updateColumnBoardTask
+  reorderBoardTask
 } from "../../redux/actions/taskActions"
 import { fetchBoardMembers } from "../../redux/actions/boardActions"
 
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   fetchBoardTasks,
-  updateColumnBoardTask,
+  reorderBoardTask,
   fetchBoardMembers
 }
 
@@ -47,19 +47,19 @@ class Board extends Component {
       if (!source) return
       if (!draggableId) return
 
-      return console.log(e)
+      // return console.log(e)
 
       if (type === "COLUMN") {
         console.log(e)
       } else {
-        this.props.updateColumnBoardTask({
+        this.props.reorderBoardTask({
           source,
           destination,
           taskId: draggableId
         })
       }
     } catch {
-      console.error(e)
+      console.log(e)
     }
   }
 

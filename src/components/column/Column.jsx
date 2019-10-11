@@ -20,7 +20,7 @@ const Column = props => {
             {column.name}
           </div>
 
-          <Droppable droppableId={String(column.id)}>
+          <Droppable droppableId={`column-${column.id}`}>
             {provided => (
               <div
                 style={{
