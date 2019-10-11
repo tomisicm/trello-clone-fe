@@ -8,6 +8,7 @@ import {
   reorderBoardTask
 } from "../../redux/actions/taskActions"
 import { fetchBoardMembers } from "../../redux/actions/boardActions"
+import { reorderBoardColumns } from "../../redux/actions/columnActions"
 
 import Column from "../../components/column/Column"
 import ColumnAddCard from "../../components/column/ColumnAddCard"
@@ -21,6 +22,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   fetchBoardTasks,
   reorderBoardTask,
+  reorderBoardColumns,
   fetchBoardMembers
 }
 
@@ -42,15 +44,16 @@ class Board extends Component {
     try {
       /* taskId == draggableId, destination.droppableId = column_id **/
       const { destination, source, draggableId, type } = e
+      const boardId = this.props.match.params.board
 
       if (!destination) return
       if (!source) return
       if (!draggableId) return
 
-      // return console.log(e)
+      // return console.log(this.props)
 
       if (type === "COLUMN") {
-        console.log(e)
+        this.props.reorderBoardColumns({ boardId, e })
       } else {
         this.props.reorderBoardTask({
           source,
@@ -59,7 +62,7 @@ class Board extends Component {
         })
       }
     } catch {
-      console.log(e)
+      console.error(e)
     }
   }
 

@@ -15,8 +15,7 @@ class ColumnService {
   }
 
   reorderColumns(boardId, columns) {
-    console.log(columns)
-    return http.put(`api/board/${boardId}/columns/order`)
+    return http.put(`api/board/${boardId}/columns/order`, columns)
   }
 }
 
