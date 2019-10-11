@@ -56,35 +56,6 @@ export function reorderBoardTask(e) {
   }
 }
 
-export function updateColumnBoardTask({ destination, source, taskId }) {
-  return async function(dispatch, getState) {
-    const { data } = await taskService.updateTask({
-      id: taskId,
-      column_id: destination.droppableId
-    })
-
-    //object to be removed
-    dispatch({
-      type: DELETE_BOARD_TASK,
-      payload: {
-        id: parseInt(taskId, 10),
-        column_id: parseInt(source.droppableId, 10)
-      }
-    })
-
-    // new incoming object
-    dispatch({
-      type: CREATE_BOARD_TASK,
-      payload: {
-        task: data,
-        location: {
-          index: destination.index
-        }
-      }
-    })
-  }
-}
-
 export function createBoardTask(columnId, task) {
   return async function(dispatch, getState) {
     const { data } = await taskService.createTask(columnId, task)
