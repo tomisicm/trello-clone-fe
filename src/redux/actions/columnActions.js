@@ -1,5 +1,6 @@
-import { CREATE_BOARD_COLUMN } from "../constants"
+import { CREATE_BOARD_COLUMN, FETCH_BOARD_TASKS } from "../constants"
 import columnService from "../../utils/services/column-service"
+import taskService from "../../utils/services/task-service"
 
 export function createBoardColumn(boardId, column) {
   return async function(dispatch, getState) {
@@ -16,12 +17,16 @@ export function reorderBoardColumns(call) {
   e.source.droppableId.replace("column-", "")
 
   const replaceOrder = {
-    from: parseInt(e.destination.droppableId.replace("column-", ""), 10),
-    to: parseInt(e.source.droppableId.replace("column-", ""), 10)
+    from: parseInt(e.source.droppableId.replace("column-", ""), 10),
+    to: parseInt(e.destination.droppableId.replace("column-", ""), 10)
   }
 
   return async function(dispatch, getState) {
-    const { data } = await columnService.reorderColumns(boardId, replaceOrder)
-    console.log(data)
+    let { data } = await columnService.reorderColumns(boardId, replaceOrder)
+
+    if (data) {
+      const { data } = await taskService.getTasks(boardId)
+      dispatch({ type: FETCH_BOARD_TASKS, payload: data })
+    }
   }
 }

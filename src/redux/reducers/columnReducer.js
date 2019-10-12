@@ -4,7 +4,7 @@ import {
   CREATE_BOARD_TASK,
   UPDATE_BOARD_TASK,
   DELETE_BOARD_TASK
-  // TASK_CHANGED_COLUMN
+  // REORDER_BOARD_COLUMNS
 } from "../constants"
 
 import _ from "lodash"
@@ -89,23 +89,10 @@ const columnReducer = (state = initialState, action) => {
       }
     }
 
-    // case TASK_CHANGED_COLUMN: {
-    //   return {
-    //     ...state,
-    //     columns: [
-    //       ...state.columns.map(column => {
-    //         if (column.id === action.payload.column_id) {
-    //           column.tasks.map(task => {
-    //             if (task.id === action.payload.id) {
-    //               task = { ...action.payload }
-    //             }
-    //             return task
-    //           })
-    //         }
-    //         return column
-    //       })
-    //     ]
-    //   }
+    // case REORDER_BOARD_COLUMNS: {
+    // TODO:
+    // 1 - reorder columns
+    // 2 - change order for each column
     // }
 
     default:

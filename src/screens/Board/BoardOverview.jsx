@@ -49,8 +49,7 @@ class Board extends Component {
       if (!destination) return
       if (!source) return
       if (!draggableId) return
-
-      // return console.log(this.props)
+      if (destination.droppableId === source.droppableId) return
 
       if (type === "COLUMN") {
         this.props.reorderBoardColumns({ boardId, e })
