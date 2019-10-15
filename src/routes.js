@@ -35,7 +35,6 @@ const Routes = props => {
 
         <PrivateRoute
           authenticated={!_.isEmpty(user)}
-          path="/home"
           component={() => {
             return (
               <React.Fragment>
