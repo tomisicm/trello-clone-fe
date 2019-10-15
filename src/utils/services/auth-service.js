@@ -47,13 +47,10 @@ export const setCurrentUserToLS = user => {
 }
 
 export function getCurrentUserFromLS() {
-  try {
-    const user = localStorage.getItem("user")
+  const user = localStorage.getItem("user")
 
-    return JSON.parse(user)
-  } catch (error) {
-    throw error
-  }
+  if (user) return JSON.parse(user)
+  return {}
 }
 
 export function getJwt() {
