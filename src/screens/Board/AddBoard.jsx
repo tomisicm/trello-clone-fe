@@ -21,7 +21,6 @@ class AddBoard extends Component {
     boardService
       .createBoard(this.state.board)
       .then(({ data }) => {
-        console.log(data)
         this.props.history.push("/home")
       })
       .catch(({ response }) => {

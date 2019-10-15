@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import MainNavigation from "./components/navigation/MainNavigation"
 
-import { Routes } from "./routes"
+import Routes from "./routes"
 
 import "./App.css"
 
@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <MainNavigation />
-        <Routes></Routes>
+        <Routes />
       </React.Fragment>
     )
   }
