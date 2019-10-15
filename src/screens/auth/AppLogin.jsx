@@ -4,8 +4,7 @@ import { connect } from "react-redux"
 
 import Joi from "joi-browser"
 
-import authService from "./../../utils/services/auth-service"
-import { fetchCurrentUser } from "../../redux/actions/userActions"
+import { login } from "../../redux/actions/userActions"
 
 import LoginForm from "../../components/common/LoginForm"
 import BaseInput from "./../../components/common/Input"
@@ -80,10 +79,7 @@ class Login extends LoginForm {
 
   doSubmit = () => {
     try {
-      authService
-        .login(this.state.data)
-        .then(() => this.props.fetchCurrentUser())
-        .then(() => this.setState(() => ({ toHome: true })))
+      this.props.login(this.state.data).then(this.props.history.push("/home"))
     } catch (e) {
       const newError = e.response.data
 
@@ -96,5 +92,5 @@ class Login extends LoginForm {
 
 export default connect(
   null,
-  { fetchCurrentUser }
+  { login }
 )(Login)
